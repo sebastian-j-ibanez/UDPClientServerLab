@@ -30,22 +30,15 @@ void main()
 
 	//Create server socket address
 	sockaddr_in CltAddr;
-	CltAddr.sin_family = AF_INET; //Address family type itnernet
-	CltAddr.sin_addr.s_addr = inet_addr("127.0.0.1"); //IP address
-	CltAddr.sin_port = htons(27500); //port (host to network conversion)
+	CltAddr.sin_family = AF_INET;
+	CltAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+	CltAddr.sin_port = htons(27500);
 	
 	//Create server socket address
 	sockaddr_in SvrAddr;
-	SvrAddr.sin_family = AF_INET; //Address family type itnernet
-	SvrAddr.sin_addr.s_addr = inet_addr("127.0.0.1"); //IP address
-	SvrAddr.sin_port = htons(27000); //port (host to network conversion)
-
-	//if ((connect(ClientSocket, (struct sockaddr*)&SvrAddr, sizeof(SvrAddr))) == SOCKET_ERROR) {
-	//	closesocket(ClientSocket);
-	//	WSACleanup();
-	//	cout << "ERROR: Connection attempted failed" << std::endl;
-	//	return;
-	//}
+	SvrAddr.sin_family = AF_INET;
+	SvrAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+	SvrAddr.sin_port = htons(27000);
 
 	if (bind(ClientSocket, (struct sockaddr*)&CltAddr, sizeof(CltAddr)) == SOCKET_ERROR)
 	{

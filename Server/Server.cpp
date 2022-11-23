@@ -7,8 +7,8 @@ using namespace std;
 
 void main()
 {
-	char RxBuffer[128] = {};
-	char TxBuffer[128] = { '"H', 'e', 'l', 'l', 'o', ' ', 'C', 'l', 'i', 'e', 'n', 't'};
+	char ReceiveBuffer[128] = {};
+	//char SendBuffer[128] = { '"H', 'e', 'l', 'l', 'o', ' ', 'C', 'l', 'i', 'e', 'n', 't'};
 
 	// Starts Winsock DLLs
 	WSADATA wsaData;
@@ -36,9 +36,9 @@ void main()
 
 	//Create server socket address
 	sockaddr_in SvrAddr;
-	SvrAddr.sin_family = AF_INET; //Address family type itnernet
-	SvrAddr.sin_addr.s_addr = inet_addr("127.0.0.1"); //IP address
-	SvrAddr.sin_port = htons(27000); //port (host to network conversion)
+	SvrAddr.sin_family = AF_INET;
+	SvrAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+	SvrAddr.sin_port = htons(27000);
 
 	// Bind server socket to client socket address
 	if (bind(ServerSocket, (struct sockaddr*)&SvrAddr, sizeof(SvrAddr)) == SOCKET_ERROR)
@@ -49,36 +49,13 @@ void main()
 		return;
 	}
 
-	////listen on a socket
-	//if (listen(ServerSocket, 1) == SOCKET_ERROR)
-	//{
-	//	closesocket(ServerSocket);
-	//	WSACleanup();
-	//	cout << "ERROR: listen failed to configure ServerSocket" << std::endl;
-	//	return;
-	//}
-
-	////accepts a connection from a client
-	//SOCKET ConnectionSocket;
-	//ConnectionSocket = SOCKET_ERROR;
-	//if ((ConnectionSocket = accept(ServerSocket, NULL, NULL)) == SOCKET_ERROR)
-	//{
-	//	closesocket(ServerSocket);
-	//	WSACleanup();
-	//	return;
-	//}
-
-	//char data[13] = {NULL};
-	//recv(ConnectionSocket, data, sizeof(data), 0);
-	//cout << "Server Received Message: " << data << endl;
-
 	// Receive message from client socket address
 	int addr_len = sizeof(CltAddr);
-	recvfrom(ServerSocket, RxBuffer, sizeof(RxBuffer), 0, (struct sockaddr*)&CltAddr, &addr_len);
-	cout << RxBuffer << endl;
+	recvfrom(ServerSocket, ReceiveBuffer, sizeof(ReceiveBuffer), 0, (struct sockaddr*)&CltAddr, &addr_len);
+	cout << ReceiveBuffer << endl;
 
 	// Send response to client socket address
-	sendto(ServerSocket, TxBuffer, sizeof(TxBuffer), 0, (struct sockaddr*)&CltAddr, sizeof(CltAddr));
+	//sendto(ServerSocket, TxBuffer, sizeof(TxBuffer), 0, (struct sockaddr*)&CltAddr, sizeof(CltAddr));
 
 	// Closes server socket
 	closesocket(ServerSocket); 
