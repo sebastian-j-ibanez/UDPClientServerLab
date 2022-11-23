@@ -8,7 +8,7 @@ using namespace std;
 void main()
 {
 	char ReceiveBuffer[128] = {};
-	//char SendBuffer[128] = { '"H', 'e', 'l', 'l', 'o', ' ', 'C', 'l', 'i', 'e', 'n', 't'};
+	char SendBuffer[128] = { '"H', 'e', 'l', 'l', 'o', ' ', 'C', 'l', 'i', 'e', 'n', 't'};
 
 	// Starts Winsock DLLs
 	WSADATA wsaData;
@@ -55,7 +55,7 @@ void main()
 	cout << ReceiveBuffer << endl;
 
 	// Send response to client socket address
-	//sendto(ServerSocket, TxBuffer, sizeof(TxBuffer), 0, (struct sockaddr*)&CltAddr, sizeof(CltAddr));
+	sendto(ServerSocket, SendBuffer, sizeof(SendBuffer), 0, (struct sockaddr*)&CltAddr, sizeof(CltAddr));
 
 	// Closes server socket
 	closesocket(ServerSocket); 

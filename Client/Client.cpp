@@ -7,8 +7,8 @@ using namespace std;
 
 void main()
 {
-	char RxBuffer[128] = {};
-	char TxBuffer[128] = { '"H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd'};
+	char ReceiveBuffer[128] = {};
+	char SendBuffer[128] = { '"H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd'};
 
 	//starts Winsock DLLs
 	WSADATA wsaData;
@@ -48,10 +48,13 @@ void main()
 		return;
 	}
 
-	sendto(ClientSocket, TxBuffer, sizeof(TxBuffer), 0, (struct sockaddr*)&SvrAddr, sizeof(SvrAddr));
+	sendto(ClientSocket, SendBuffer, sizeof(SendBuffer), 0, (struct sockaddr*)&SvrAddr, sizeof(SvrAddr));
+	cout << "Message sent" << endl;
 
-	//int addr_len = sizeof(SvrAddr);
-	//recvfrom(ClientSocket, TxBuffer, sizeof(TxBuffer), 0, (struct sockaddr*)&SvrAddr, &addr_len);
+	int addr_len = sizeof(SvrAddr);
+	recvfrom(ClientSocket, ReceiveBuffer, sizeof(ReceiveBuffer), 0, (struct sockaddr*)&SvrAddr, &addr_len);
+	cout << "Message received: " << endl;
+	cout << ReceiveBuffer << endl;
 
 	closesocket(ClientSocket);
 	WSACleanup();
