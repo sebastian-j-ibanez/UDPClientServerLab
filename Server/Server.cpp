@@ -52,7 +52,7 @@ void main()
 	// Receive message from client socket address
 	int addr_len = sizeof(CltAddr);
 	recvfrom(ServerSocket, ReceiveBuffer, sizeof(ReceiveBuffer), 0, (struct sockaddr*)&CltAddr, &addr_len);
-	cout << ReceiveBuffer << endl;
+	cout << "Message received: " << ReceiveBuffer << endl;
 
 	// Send response to client socket address
 	sendto(ServerSocket, SendBuffer, sizeof(SendBuffer), 0, (struct sockaddr*)&CltAddr, sizeof(CltAddr));

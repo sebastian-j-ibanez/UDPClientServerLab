@@ -53,8 +53,7 @@ void main()
 
 	int addr_len = sizeof(SvrAddr);
 	recvfrom(ClientSocket, ReceiveBuffer, sizeof(ReceiveBuffer), 0, (struct sockaddr*)&SvrAddr, &addr_len);
-	cout << "Message received: " << endl;
-	cout << ReceiveBuffer << endl;
+	cout << "Reply received: " << ReceiveBuffer << endl;
 
 	closesocket(ClientSocket);
 	WSACleanup();
